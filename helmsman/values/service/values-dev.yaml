@@ -1,0 +1,33 @@
+metadata:       
+  environment: dev 
+  appName: spring-boot-vault-demo
+deployment:
+  create: true
+  replicas: 1
+  image: service:1.0.0
+  name: spring-boot-vault-demo
+  serviceAccountName: vault
+  containerPort: 8080
+  env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: dev
+  volumeMounts:
+  - name: spring-boot-demo
+    mountPath: /opt/app/application.yml
+    subPath: application.yml
+  volumes:
+  - configMap:
+      name: spring-boot-demo-config
+    name: spring-boot-demo
+
+config:
+  create: true
+  name: spring-boot-demo-config
+  vault:
+    uri: http://vault:8200
+    kubernetes:
+      role: demo       
+
+networkPolicy:
+  create: true
+  open: true

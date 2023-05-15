@@ -1,0 +1,15 @@
+path "kv/spring-boot-demo" {
+  capabilities = ["read"]
+}
+
+path "kv/spring-boot-demo/dev" {
+  capabilities = ["read"]
+}
+
+path "auth/token/lookup-self" {
+  capabilities = ["read"]
+}
+
+path "auth/token/create" {
+  capabilities = ["create", "read", "update", "list"]
+}

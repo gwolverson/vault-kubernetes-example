@@ -1,0 +1,51 @@
+spring:
+  config:
+    import: optional:vault://
+  cloud:
+    vault:
+      enabled: ${vault-enabled:false}
+      application-name: spring-boot-demo
+      connection-timeout: ${vault-connection-timeout:5000}
+      read-timeout: ${vault-read-timeout:15000}
+      authentication: KUBERNETES
+      kv:
+        backend: kv
+        enabled: true
+        profile-separator: '/'
+        application-name: spring-boot-demo
+        default-context: spring-boot-demo
+        profiles: dev
+management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+      probes:
+        enabled: true
+    loggers:
+      enabled: true
+    shutdown:
+      enabled: true
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+appsecurity:
+  management:
+    username: ADMIN
+    password: ${admin:password}
+
+securedroutes:
+  management:
+    - "/actuator/shutdown"
+    - "/actuator/loggers/**"
+    - "/actuator/heapdump"
+    - "/actuator/env"
+  unprotected:
+    - "/actuator/info"
+    - "/actuator/prometheus"
+    - "/actuator/health/**"
+    - "/hello"

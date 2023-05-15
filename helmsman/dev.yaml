@@ -1,0 +1,25 @@
+metadata:
+  maintainer: greg.wolverson@capgemini.com
+  description: Desired State File for the dev environment
+
+namespaces:
+  dev:
+
+helmRepos:
+  vault: https://helm.releases.hashicorp.com
+
+apps:
+  spring-boot-demo:
+    namespace: dev
+    enabled: true
+    chart: '../service-helm-chart'
+    version: 1.0.0
+    valuesFile: values/service/values-dev.yaml    
+  vault:
+    namespace: dev
+    enabled: true
+    chart: vault/vault
+    version: 0.24.1
+    valuesFile: values/vault/values-dev.yaml
+
+

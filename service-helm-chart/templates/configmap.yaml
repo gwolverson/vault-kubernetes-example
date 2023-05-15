@@ -1,0 +1,18 @@
+{{- if .Values.config.create }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.config.name  }}
+  namespace: {{ .Values.metadata.environment }}
+immutable: true
+data:
+  application.yml: |
+    spring:     
+      cloud:      
+        vault:
+          enabled: true
+          uri: {{ .Values.config.vault.uri }}
+          kubernetes:
+            role: {{ .Values.config.vault.kubernetes.role }}        
+{{- end }}
