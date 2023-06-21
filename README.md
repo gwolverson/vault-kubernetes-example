@@ -52,8 +52,8 @@ This will take about 1-2 minutes and then everything should be setup. You can th
 
 Curl without passing auth will result in a 401
 
-`http://localhost:8080/actuator/env -v` 
+`curl http://localhost:8080/actuator/env -v` 
 
 Curl with auth will result in a 200 (and giving a JSON response)
 
-`http://localhost:8080/actuator/env --user ADMIN:password -v` 
+`curl http://localhost:8080/actuator/env --user ADMIN:password -v` 
